@@ -20,16 +20,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 50px;
   gap: 20px;
 }
 .loginMainBox .loginBox .rightBox {
+  position: relative;
   width: 45%;
   height: 100%;
-  background-image: url("../../../public/images/video.gif");
+  background: linear-gradient(to bottom, transparent 0%, rgb(0, 0, 0) 100%), url("../../../public/images/video.gif");
   background-size: cover;
   background-position: center;
   border-radius: 26px;
+}
+.loginMainBox .loginBox .rightBox img {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 120px;
+  height: 60px;
 }
 .loginMainBox .loginBox .leftBox {
   width: 50%;
@@ -46,15 +54,18 @@
   height: 120px;
   margin-bottom: 20px;
 }
+.loginMainBox .loginBox .leftBox .loginIntro {
+  margin-bottom: 25px;
+}
 .loginMainBox .loginBox .leftBox .loginIntro h1 {
-  font-size: 2.5rem;
+  font-size: 4rem;
   font-weight: 800;
   font-weight: bolder;
   text-align: center;
   line-height: 60px;
 }
 .loginMainBox .loginBox .leftBox .loginIntro h2 {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-align: center;
 }

@@ -6,14 +6,14 @@ const LoginBox = () => {
     <div className="loginMainBox">
       <div className="loginBox">
         <div className="leftBox">
-          <img className="logo" src="images/logo.png" alt="logo" />
+          {/* <img className="logo" src="images/logo.png" alt="logo" /> */}
+          <div className="loginIntro">
+            <h1>Welcome</h1>
+            <h2>We are glad to see you back with us</h2>
+          </div>
           {/* <div className="loginIntro">
             <h1>Login</h1>
-            <h2>We are glad to see you back with us</h2>
           </div> */}
-          <div className="loginIntro">
-            <h1>Login</h1>
-          </div>
           <div className="inputBox">
             <div className="inputFields">
               <img
@@ -61,7 +61,9 @@ const LoginBox = () => {
             </button>
           </div>
         </div>
-        <div className="rightBox"></div>
+        <div className="rightBox">
+            <img src="images/logo.png" alt="" />
+        </div>
       </div>
     </div>
   );

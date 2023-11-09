@@ -1,19 +1,62 @@
-import React from "react";
 import "./LoginBox.css";
 
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+import Cookies from "js-cookie";
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../firebase/Firebase";
+const auth = getAuth();
+
 const LoginBox = () => {
+  document.title = "Login | Elettrico";
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [buttontext, setButtonText] = useState("Login");
+  const navigate = useNavigate();
+
+  const getCookie = async () => {
+    try {
+      const user = await Cookies.get("user");
+      if (user != undefined) {
+        navigate("/homepage");
+      }
+    } catch (error) {
+      console.error("Error while getting the user cookie:", error);
+    }
+  };
+  getCookie();
+
+  const loginHandler = async () => {
+    setButtonText("Logging...");
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user.providerData[0].email;
+        setButtonText("Login");
+        Cookies.set("user", user, { expires: 1, path: "/" });
+        navigate("/homepage");
+      })
+      .catch((error) => {
+        setButtonText("Login");
+        if (error.code === "auth/invalid-login-credentials") {
+          alert("Invalid Email or Password");
+        }
+        else if(error.code === "auth/invalid-email"){
+          alert("Inalid Email");
+        }
+      });
+  };
+
   return (
     <div className="loginMainBox">
       <div className="loginBox">
         <div className="leftBox">
-          {/* <img className="logo" src="images/logo.png" alt="logo" /> */}
           <div className="loginIntro">
             <h1>Welcome</h1>
             <h2>We are glad to see you back with us</h2>
           </div>
-          {/* <div className="loginIntro">
-            <h1>Login</h1>
-          </div> */}
+
           <div className="inputBox">
             <div className="inputFields">
               <img
@@ -23,10 +66,12 @@ const LoginBox = () => {
                 alt="person-male--v1"
               />
               <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className="inputFields">
@@ -41,9 +86,11 @@ const LoginBox = () => {
                 name="password"
                 id="password"
                 placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              value={password}
               />
             </div>
-            <button>Login</button>
+            <button onClick={loginHandler}>Login</button>
             <h3>
               <strong>Login</strong> with others
             </h3>
@@ -62,7 +109,7 @@ const LoginBox = () => {
           </div>
         </div>
         <div className="rightBox">
-            <img src="images/logo.png" alt="" />
+          <img src="images/logo.png" alt="" />
         </div>
       </div>
     </div>

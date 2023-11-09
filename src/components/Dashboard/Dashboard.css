@@ -62,16 +62,17 @@
   height: 100%;
   min-height: 60px;
   width: 100%;
-  max-width: 50%;
 }
 .main .dashmain #massData {
-  overflow: wrap;
+  overflow-y: hidden;
+  overflow-x: auto;
   display: grid;
   grid-template-columns: 300px 300px 300px;
   -moz-column-gap: 10px;
        column-gap: 10px;
   row-gap: 10px;
   text-align: left;
-  max-width: 90%;
+  max-width: 70%;
+  max-height: 30%;
   height: 100%;
 }/*# sourceMappingURL=Dashboard.css.map */

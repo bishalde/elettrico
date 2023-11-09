@@ -54,6 +54,10 @@ const Dashboard = () => {
     };
   }, []);
 
+  useEffect(() => {
+    setDataKeys(Object.keys(data));
+  }, [data]);
+
   return (
     <>
       <section className="main">
@@ -72,13 +76,17 @@ const Dashboard = () => {
                 <div className="data" key={element}>
                   <p>{element}</p>
                   <p>
-                  {Object.keys(data[element]).map((value) => (
-                      <h1 key={value}>{value} : {data[element][value]}  </h1>
+                    {Object.keys(data[element]).map((value) => (
+                      <h1 key={value}>
+                        {value} : {data[element][value]}{" "}
+                      </h1>
                     ))}
                   </p>
                   <p>Loading..</p>
                   <p>Loading...</p>
-                  <p><a href="#">button</a></p>
+                  <p>
+                    <a href="#">button</a>
+                  </p>
                 </div>
               ))}
             </div>

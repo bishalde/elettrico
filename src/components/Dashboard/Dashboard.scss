@@ -41,6 +41,7 @@
             width: 90%;
             padding: 10px;
             height: 100%;
+            border: 1px solid #ccc;
             
         }
         .header p {
@@ -65,6 +66,18 @@
             height: 100%;
             min-height: 60px; 
             width: 100%;  
+        }
+        #massData {
+            overflow: wrap;
+            display: grid;
+            grid-template-columns: 300px 300px 300px;
+            grid-template-rows: 300px 300px 300px;
+            column-gap: 10px;
+            row-gap: 10px;
+            text-align: left;
+            max-width: 90%;
+            height: 100%;
+            background: red;
         }
     }
 

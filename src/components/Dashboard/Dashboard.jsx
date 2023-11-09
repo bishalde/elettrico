@@ -75,9 +75,9 @@ const Dashboard = () => {
               {dataKeys.map((element) => (
                 <div className="data" key={element}>
                   <p>{element}</p>
-                  <p>
+                  <p className="massData" id="massData">
                     {Object.keys(data[element]).map((value) => (
-                      <h1 key={value}>
+                      <h1 className="datasegment" id="datasegment" key={value}>
                         {value} : {data[element][value]}{" "}
                       </h1>
                     ))}

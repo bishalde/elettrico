@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 import { app } from "../../firebase/Firebase";
 import Navbar from "../Navbar/Navbar";
 
@@ -11,7 +11,7 @@ const Dashboard = () => {
   document.title = "Dashboard | Elettrico";
   const [data, setData] = useState([]);
   const [dataKeys, setDataKeys] = useState([]);
-  const [loading, setLoading] = useState(true); // New state for loading
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const getCookie = async () => {
@@ -34,10 +34,10 @@ const Dashboard = () => {
       if (snapshot.exists()) {
         setData(snapshot.val());
         setDataKeys(Object.keys(snapshot.val()));
-        setLoading(false); // Set loading to false when data is available
+        setLoading(false);
       } else {
         alert("No data available");
-        setLoading(false); // Set loading to false even if no data is available
+        setLoading(false);
       }
     });
 
@@ -45,6 +45,22 @@ const Dashboard = () => {
       unsubscribe();
     };
   }, []);
+
+  const handleSNoChange = (element, newValue) => {
+    // Update the SNo value in the local state
+    setData((prevData) => ({
+      ...prevData,
+      [element]: {
+        ...prevData[element],
+        SNo: newValue,
+      },
+    }));
+
+    const dataRef = ref(getDatabase(app), `ELETTRICO/K001/${element}`);
+    update(dataRef, { SNo: newValue }).catch((error) => {
+      console.error("Firebase update error:", error);
+    });
+  };
 
   return (
     <>
@@ -64,24 +80,37 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 {loading ? (
-                  // Render a loader while data is being fetched
                   <p className="loader">Loading...</p>
                 ) : (
                   dataKeys.map((element) => (
                     <tr key={element}>
-                      <td><input type="text" value={element} /></td>
+                      <td>
+                        <input
+                          type="text"
+                          value={data[element].SNo}
+                          onChange={(e) =>
+                            handleSNoChange(element, e.target.value)
+                          }
+                        />
+                      </td>
                       <td className="CANdata">
-                        {Object.keys(data[element]).map((value) => (
-                          <p key={value}>
-                            {value} : {data[element][value]}{" "}
-                          </p>
-                        ))}
+                        {Object.keys(data[element]).map(
+                          (value) =>
+                            value !== "SNo" && (
+                              <p key={value}>
+                                {value} : {data[element][value]}{" "}
+                              </p>
+                            )
+                        )}
                       </td>
                       <td>Loading...</td>
                       <td>Loading...</td>
-                      <td><button>{element}</button></td>
+                      <td>
+                        <button>{element}</button>
+                      </td>
                     </tr>
-                  )))}
+                  ))
+                )}
               </tbody>
             </table>
           </div>

@@ -1,86 +1,99 @@
-.main{
+.main {
+  .dashmain {
+    position: relative;
+    top: 80px;
 
-    .dashmain{
-        position: relative;
-        top: 80px;
+    .dashboard {
 
-        .dashboard {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            width: 100%;
-            height: 100%;
-        } 
-        .main_div {
-            display: flex;
-            justify-content: center;
-            align-items: center;    
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
+      padding: 30px;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+
+        border: 2px solid black;
+
+        tr{
+          border: 2px solid black;
         }
-        .header {
-            display: flex;
-            flex-direction: row;
-            border: 2px solid black;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            width: 90%;
-            padding: 10px;
-            height: 100%;
-            
-        }
-        .data {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            width: 90%;
-            padding: 10px;
-            height: 100%;
-            border: 1px solid #ccc;
-            
-        }
-        .header p {
-            border: 1px solid #ccc;
-            padding: 5px;
-            height: 60px;
-            text-align: center;
+
+        th,
+        td {
+
+          padding: 1rem;
+          height: 100%;
+          text-align: center;
+
+          input {
             width: 100%;
-            background: #000;
+            border: none;
+            outline: none;
+            text-align: center;
+            background-color: inherit;
+          }
+
+          button {
+            background-color: black;
             color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+          }
         }
-        .data p {
-            border: 1px solid #ccc;
-            padding: 5px;
-            height: 60px;
-            text-align: center;
-            width: 100%;
-            color: rgb(93, 93, 93);
+
+        th {
+          background: #000;
+          color: white;
         }
-        #bigblock {
-            overflow: wrap;
-            height: 100%;
-            min-height: 60px; 
-            width: 100%;  
+
+        .CANdata {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 15px;
+
+          p {
+            border-radius: 20px;
+            padding: 5px 20px;
+
+            &:nth-child(n) {
+              background-color: #556df5;
+              color: white;
+            }
+
+            &:nth-child(2n) {
+              background-color: rgb(9, 56, 110);
+              color: #f0f0f0;
+            }
+
+            &:hover {
+              background-color: #000000;
+              color: white;
+              scale: 1.1;
+            }
+          }
+
         }
-        #massData {
-            // overflow: wrap;
-            overflow-y: hidden;
-            overflow-x: auto;
-            display: grid;
-            grid-template-columns: 300px 300px 300px;
-            column-gap: 10px;
-            row-gap: 10px;
-            text-align: left;
-            max-width: 70%;
-            max-height: 30%;
-            height: 100%;
+
+        tbody tr:nth-child(odd) {
+          background-color: #f0f0f0; // Set background color for odd rows
         }
+
+        tbody tr:nth-child(even) {
+          background-color: #ffffff; // Set background color for even rows
+        }
+
+        td a {
+          text-decoration: none;
+          color: blue;
+        }
+      }
     }
-
-
+  }
 }
